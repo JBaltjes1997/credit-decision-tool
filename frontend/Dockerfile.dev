@@ -1,0 +1,20 @@
+# Dockerfile.dev
+FROM node:20-slim
+
+WORKDIR /app
+
+# Copy only package files first for caching
+COPY package*.json ./
+RUN npm install
+
+# Copy the rest of the code
+COPY . .
+
+# Environment
+ENV NODE_ENV=development
+ENV NEXT_TELEMETRY_DISABLED=1
+
+EXPOSE 3000
+
+# Run Next.js in dev mode, binding to all interfaces and disabling Turbopack
+CMD ["npm", "run", "dev"]
