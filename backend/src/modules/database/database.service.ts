@@ -1,9 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // src/database/database.service.ts
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import { Pool, PoolClient } from 'pg';
 
 @Injectable()
 export class DatabaseService implements OnModuleInit, OnModuleDestroy {
+  static onModuleInit() {
+    throw new Error('Method not implemented.');
+  }
   private pool: Pool;
 
   constructor() {
@@ -38,6 +45,6 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
    * Start a transaction (returns a connected client).
    */
   async getClient(): Promise<PoolClient> {
-    return this.pool.connect();
+    return await this.pool.connect();
   }
 }
