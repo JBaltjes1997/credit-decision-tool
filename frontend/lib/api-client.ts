@@ -1,3 +1,4 @@
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function api<T>(
@@ -5,7 +6,7 @@ export async function api<T>(
   options?: RequestInit
 ): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, {
-    credentials: 'include',
+    // credentials: 'include',
     ...options,
   });
 

@@ -3,6 +3,7 @@ import { DatabaseService } from './database/database.service';
 import { Account } from 'src/common/types/account';
 import { Limit } from 'src/common/types/Limit';
 import { Detail } from 'src/common/types/detail';
+import { get } from 'http';
 
 @Injectable()
 export class AppService {
@@ -18,7 +19,7 @@ export class AppService {
     };
   }
 
-  getDetails(): Detail[] {
+  getDetails(): Promise<Detail[]> {
     return [
       {
         CRBScore: 'JJ',
@@ -53,9 +54,21 @@ export class AppService {
 
   getAccounts(): Account[] {
     return [
-      { username: 'A. Nonymous', phonenumber: 2541001001 },
-      { username: "N. O'Body", phonenumber: 2543141592 },
+      {
+        walletAccount: 'p1234567',
+        username: 'A. Nonymous',
+        phonenumber: 2541001001,
+      },
+      {
+        walletAccount: 'q7654321',
+        username: "N. O'Body",
+        phonenumber: 2543141592,
+      },
     ];
+  }
+
+  getAccount(number: number): Account {
+    return this.getAccounts()[number];
   }
 
   getLimits(): Limit[] {
@@ -64,13 +77,11 @@ export class AppService {
         proposedLimit: 1000,
         predictedLimit: 1200,
         expectedLimit: 1100,
-        advice: 50,
       },
       {
         proposedLimit: 1000,
         predictedLimit: 1200,
         expectedLimit: 1100,
-        advice: 50,
       },
     ];
   }

@@ -1,19 +1,21 @@
+'use client';
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useEffect, useState } from "react";
+import { get } from "https";
+import { api } from "@/lib/api-client";
+import { Account } from "@/lib/types/account";
+import { apiSelect } from "@/lib/apiSelect";
 
-export default async function Home() {
+export default function Home() {
   return (
     
     <div className="min-h-screen bg-muted p-6">
       <div className="w-[1200px] mx-auto space-y-4">
         {/* Page Title */}
         <h1 className="text-2xl font-bold text-foreground">Krediet Beoordeling Dashboard</h1>
-        <select className="selector1">
-          <option value="default">Selecteer een klant</option>
-          <option value="customer1">A. Nonymous</option>
-          <option value="customer2">N. O&apos;Body</option>
-        </select>
+        {apiSelect()}
 
         {/* CRB Section */}
         <Card className="border-l-4 border-l-destructive">
@@ -178,22 +180,5 @@ export default async function Home() {
     </div>
   );
 };
-
-
-// async function getHello() {
-//   const res = await fetch("http://localhost:8000/");
-//   return res.json();
-// }
-
-// export default async function Home() {
-//   const data = await getHello();
-
-//   return (
-//     <div>
-//       <h1>Next.js + Nest.js</h1>
-//       <p>{data.message}</p>
-//     </div>
-//   );
-// }
 
 
