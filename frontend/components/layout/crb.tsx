@@ -13,7 +13,7 @@ export default function Crb({walletAccount}: CustomerDataProps) {
     useEffect(() => {
         if(!walletAccount) return;
         
-        getCRB(walletAccount).then(setCrbInfo);
+        // getCRB(walletAccount).then(setCrbInfo);
     }, [walletAccount]);
     return (
 <Card className="border-l-4 border-l-destructive">
