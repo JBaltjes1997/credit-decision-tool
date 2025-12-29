@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { api } from "./api-client";
-import { detail } from "./types/detail";
 
 type Details = {
     walletAccount: string;

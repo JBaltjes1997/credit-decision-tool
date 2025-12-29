@@ -2,7 +2,7 @@
 import { Badge } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { useEffect, useState } from "react";
-import { getCRB } from "@/lib/getCRB";
+import { getFinanceDetails } from "@/lib/getFinanceDetails";
 
 type CustomerDataProps = {
   walletAccount: string;
@@ -13,7 +13,7 @@ export default function Crb({walletAccount}: CustomerDataProps) {
     useEffect(() => {
         if(!walletAccount) return;
         
-        // getCRB(walletAccount).then(setCrbInfo);
+        getFinanceDetails(walletAccount).then(setCrbInfo);
     }, [walletAccount]);
     return (
 <Card className="border-l-4 border-l-destructive">
