@@ -1,6 +1,20 @@
+"use client"
+import { use, useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { getLimits } from "@/lib/getLimits";
 
-export default function CreditAdvice() {
+type CustomerDataProps = {
+  walletAccount: string;
+};  
+
+export default function CreditAdvice({ walletAccount }: { walletAccount: string }) {
+    const [creditInfo, setCreditInfo] = useState<any>(null);
+
+    useEffect(() => {
+        if(!walletAccount) return;
+
+        getLimits(walletAccount).then(setCreditInfo);
+    }, [walletAccount]);
     return (
 <Card className="border-l-4 border-l-accent-foreground bg-accent">
     <CardHeader className="pb-2">
@@ -12,21 +26,21 @@ export default function CreditAdvice() {
         <div className="space-y-2">
         <div className="flex justify-between">
             <span className="text-muted-foreground text-sm">Proposed limit:</span>
-            <span className="font-bold text-primary">9.500</span>
+            <span className="font-bold text-primary">{creditInfo?.proposedLimit || "Onbekend"}</span>
         </div>
         <div className="flex justify-between">
             <span className="text-muted-foreground text-sm">Predicted limit:</span>
-            <span className="font-bold text-primary">15.000</span>
+            <span className="font-bold text-primary">{creditInfo?.predictedLimit || "Onbekend"}</span>
         </div>
         </div>
         <div className="space-y-2">
         <div className="flex justify-between">
             <span className="text-muted-foreground text-sm">Expected limit:</span>
-            <span className="font-bold text-primary">7.000</span>
+            <span className="font-bold text-primary">{creditInfo?.expectedLimit || "Onbekend"}</span>
         </div>
         <div className="flex justify-between">
             <span className="text-muted-foreground text-sm">Advise:</span>
-            <span className="font-bold text-accent-foreground">7.000</span>
+            <span className="font-bold text-accent-foreground"> - </span>
         </div>
         </div>
     </div>

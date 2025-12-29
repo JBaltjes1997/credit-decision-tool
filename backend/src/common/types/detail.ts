@@ -1,4 +1,5 @@
 export type Detail = {
+  walletAccount: string;
   CRBScore: string;
   estimatedIncome: number;
   salaryIn: number;

@@ -14,41 +14,22 @@ import { Detail } from 'src/common/types/detail';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  // @Get() // moet nog een /met 'iets' toegevoegd worden
-  // async getHello(): Promise<Record<string, string>> {
-  //   return this.appService.getHello();
-  // }
-
-  @Get('/:number/details')
-  getDetails(): Promise<Detail[]> {
-    return this.appService.getDetails();
-  }
-
-  // @Get(':number')
-  // getAccount(@Param('number') number: number): Promise<Account> {
-  //   return this.appService.getAccount(number);
-  // }
-
-  // @Get()
-  // getAccounts(): Promise<Account[]> {
-  //   return this.appService.getAccounts();
-  // }
-
   @Get()
   getAccount(@Query('walletAccount') walletAccount: string) {
     if (!walletAccount) {
-      // throw new BadRequestException(
-      //   'walletAccount query parameter is required',
-      // );
       return this.appService.getAccounts();
     }
-    // return this.appService.findByWalletAccount(walletAccount);
     return this.appService.getAccount(walletAccount);
   }
 
   @Get('/limits')
-  getLimits(): Promise<Limit[]> {
-    return this.appService.getLimits();
+  getLimits(@Query('walletAccount') walletAccount: string) {
+    return this.appService.getLimits(walletAccount);
+  }
+
+  @Get('/details')
+  getDetails(@Query('walletAccount') walletAccount: string) {
+    return this.appService.getDetails(walletAccount);
   }
 
   @Get('/formule')

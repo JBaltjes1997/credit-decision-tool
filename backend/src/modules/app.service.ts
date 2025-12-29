@@ -20,50 +20,64 @@ export class AppService {
       phonenumber: 2543141592,
     },
   ];
+  private limits = [
+    {
+      walletAccount: 'p1234567',
+      currentLimit: 0,
+      proposedLimit: 1000,
+      predictedLimit: 1200,
+      expectedLimit: 1100,
+    },
+    {
+      walletAccount: 'q7654321',
+      currentLimit: 0,
+      proposedLimit: 1000,
+      predictedLimit: 1200,
+      expectedLimit: 1100,
+    },
+  ];
+  private details = [
+    {
+      walletAccount: 'p1234567',
+      CRBScore: 'JJ',
+      estimatedIncome: 1000,
+      salaryIn: 500,
+      totalVolumeIn: 200,
+      totalVolumeOut: 300,
+      wholesaleAvgOut: 150,
+      wholesaleMaxOut: 250,
+      creditIn: 100,
+      creditOut: 200,
+      fuliza: 50,
+      overdraft: 75,
+      liquorOut: 125,
+    },
+    {
+      walletAccount: 'q7654321',
+      CRBScore: 'II',
+      estimatedIncome: 1500,
+      salaryIn: 750,
+      totalVolumeIn: 300,
+      totalVolumeOut: 450,
+      wholesaleAvgOut: 225,
+      wholesaleMaxOut: 375,
+      creditIn: 150,
+      creditOut: 300,
+      fuliza: 75,
+      overdraft: 112.5,
+      liquorOut: 187.5,
+    },
+  ];
 
-  async getHello(): Promise<Record<string, string>> {
-    const queryResult = (await this.databaseService.query(
-      'SELECT NOW() AS now',
-    )) as unknown as { now: string };
+  // async getHello(): Promise<Record<string, string>> {
+  //   const queryResult = (await this.databaseService.query(
+  //     'SELECT NOW() AS now',
+  //   )) as unknown as { now: string };
 
-    return {
-      message: `Current time from DB is: ${queryResult[0].now}`,
-    };
-  }
-
-  getDetails(): Promise<Detail[]> {
-    return [
-      {
-        CRBScore: 'JJ',
-        estimatedIncome: 1000,
-        salaryIn: 500,
-        totalVolumeIn: 200,
-        totalVolumeOut: 300,
-        wholesaleAvgOut: 150,
-        wholesaleMaxOut: 250,
-        creditIn: 100,
-        creditOut: 200,
-        fuliza: 50,
-        overdraft: 75,
-        liquorOut: 125,
-      },
-      {
-        CRBScore: 'II',
-        estimatedIncome: 1500,
-        salaryIn: 750,
-        totalVolumeIn: 300,
-        totalVolumeOut: 450,
-        wholesaleAvgOut: 225,
-        wholesaleMaxOut: 375,
-        creditIn: 150,
-        creditOut: 300,
-        fuliza: 75,
-        overdraft: 112.5,
-        liquorOut: 187.5,
-      },
-    ];
-  }
-
+  //   return {
+  //     message: `Current time from DB is: ${queryResult[0].now}`,
+  //   };
+  // }
   getAccounts(): Account[] {
     return this.accounts;
   }
@@ -80,19 +94,26 @@ export class AppService {
     return account;
   }
 
-  getLimits(): Limit[] {
-    return [
-      {
-        proposedLimit: 1000,
-        predictedLimit: 1200,
-        expectedLimit: 1100,
-      },
-      {
-        proposedLimit: 1000,
-        predictedLimit: 1200,
-        expectedLimit: 1100,
-      },
-    ];
+  getLimits(walletAccount: string): Limit {
+    const limit = this.limits.find((lim) => {
+      return lim.walletAccount === walletAccount;
+    });
+
+    if (!limit) {
+      throw new NotFoundException('Limit not found');
+    }
+    return limit;
+  }
+
+  getDetails(walletAccount: string): Detail {
+    const detail = this.details.find((det) => {
+      return det.walletAccount === walletAccount;
+    });
+
+    if (!detail) {
+      throw new NotFoundException('Detail not found');
+    }
+    return detail;
   }
 
   getFormule(): null {

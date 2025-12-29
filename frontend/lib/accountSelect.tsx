@@ -36,15 +36,11 @@ export function accountSelect({ onSelect }: accountSelectProps) {
       className="w-full border rounded px-2 py-1"
       defaultValue=""
       onChange={(e) => {
-        // if (onChange) {
-        //   onChange(e.currentTarget.value);
+        
         if (onSelect) {
           onSelect(e.currentTarget.value);
-        }
-      }
-    }
-    // onChange={(e) => onSelect(e.target.value)}
-    >
+        }}}>
+
       <option value="" disabled>
         Select an account
       </option>

@@ -40,7 +40,7 @@ export default function Home() {
         
 
         {/* Advice Section with Limits */}
-        <CreditAdvice />
+        <CreditAdvice walletAccount={selectedAccount} />
       </div>
     </div>
   );
