@@ -6,11 +6,12 @@ import { Badge } from "@/components/ui/badge";
 // import { get } from "https";
 // import { api } from "@/lib/api-client";
 // import { Account } from "@/lib/types/account";
-import { apiSelect } from "@/lib/apiSelect";
+import { accountSelect } from "@/lib/accountSelect";
 import FinancialData from "@/components/layout/financialData";
 import CustomerData from "@/components/layout/customerData";
 import CreditAdvice from "@/components/layout/creditAdvice";
 import Crb from "@/components/layout/crb";
+import { on } from "events";
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
       <div className="w-[1200px] mx-auto space-y-4">
         {/* Page Title */}
         <h1 className="text-2xl font-bold text-foreground">Krediet Beoordeling Dashboard</h1>
-        {apiSelect()}
+        {accountSelect({})}
 
         {/* CRB Section */}
         <Crb />

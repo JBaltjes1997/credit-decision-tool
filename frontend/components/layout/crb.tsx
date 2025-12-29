@@ -14,6 +14,7 @@ export default function Crb() {
     </Badge>
     <p className="text-sm text-muted-foreground">
         Account has score: JJ.<br />
+
         This means the customer has been very unreliable in the past. This will be of severe negative influence on his/her credit limit.
     </p>
     <ul className="text-sm text-muted-foreground mt-2 list-disc list-inside space-y-1">

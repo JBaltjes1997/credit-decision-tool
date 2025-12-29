@@ -1,4 +1,10 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import {
+  BadRequestException,
+  Controller,
+  Get,
+  Param,
+  Query,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { Account } from 'src/common/types/account';
 import { Limit } from 'src/common/types/Limit';
@@ -13,19 +19,29 @@ export class AppController {
   //   return this.appService.getHello();
   // }
 
-  @Get()
-  getAccounts(): Promise<Account[]> {
-    return this.appService.getAccounts();
-  }
+  // @Get()
+  // getAccounts(): Promise<Account[]> {
+  //   return this.appService.getAccounts();
+  // }
 
   @Get('/:number/details')
   getDetails(): Promise<Detail[]> {
     return this.appService.getDetails();
   }
 
-  @Get(':number')
-  getAccount(@Param('number') number: number): Promise<Account> {
-    return this.appService.getAccount(number);
+  // @Get(':number')
+  // getAccount(@Param('number') number: number): Promise<Account> {
+  //   return this.appService.getAccount(number);
+  // }
+  @Get()
+  getAccount(@Query('walletAccount') walletAccount: string) {
+    if (!walletAccount) {
+      throw new BadRequestException(
+        'walletAccount query parameter is required',
+      );
+    }
+    // return this.appService.findByWalletAccount(walletAccount);
+    return this.appService.getAccount(walletAccount);
   }
 
   @Get('/limits')

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { DatabaseService } from './database/database.service';
 import { Account } from 'src/common/types/account';
 import { Limit } from 'src/common/types/Limit';
@@ -8,6 +8,18 @@ import { get } from 'http';
 @Injectable()
 export class AppService {
   constructor(private readonly databaseService: DatabaseService) {}
+  private accounts = [
+    {
+      walletAccount: 'p1234567',
+      username: 'A. Nonymous',
+      phonenumber: 2541001001,
+    },
+    {
+      walletAccount: 'q7654321',
+      username: "N. O'Body",
+      phonenumber: 2543141592,
+    },
+  ];
 
   async getHello(): Promise<Record<string, string>> {
     const queryResult = (await this.databaseService.query(
@@ -53,22 +65,19 @@ export class AppService {
   }
 
   getAccounts(): Account[] {
-    return [
-      {
-        walletAccount: 'p1234567',
-        username: 'A. Nonymous',
-        phonenumber: 2541001001,
-      },
-      {
-        walletAccount: 'q7654321',
-        username: "N. O'Body",
-        phonenumber: 2543141592,
-      },
-    ];
+    return this.accounts;
   }
 
-  getAccount(number: number): Account {
-    return this.getAccounts()[number];
+  getAccount(walletAccount: string): Account {
+    const account = this.accounts.find((acc) => {
+      return acc.walletAccount === walletAccount;
+    });
+
+    if (!account) {
+      throw new NotFoundException('Account not found');
+    }
+
+    return account;
   }
 
   getLimits(): Limit[] {
