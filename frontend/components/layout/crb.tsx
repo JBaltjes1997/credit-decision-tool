@@ -1,8 +1,20 @@
+"use client";
 import { Badge } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
+import { useEffect, useState } from "react";
+import { getCRB } from "@/lib/getCRB";
 
+type CustomerDataProps = {
+  walletAccount: string;
+};
+export default function Crb({walletAccount}: CustomerDataProps) {
+    const [crbInfo, setCrbInfo] = useState<any>(null);
 
-export default function Crb() {
+    useEffect(() => {
+        if(!walletAccount) return;
+        
+        getCRB(walletAccount).then(setCrbInfo);
+    }, [walletAccount]);
     return (
 <Card className="border-l-4 border-l-destructive">
     <CardHeader className="pb-2">
@@ -10,12 +22,12 @@ export default function Crb() {
     </CardHeader>
     <CardContent>
    <Badge className="bg-destructive text-destructive-foreground px-4 py-2 text-sm font-bold mb-2">
-              CRB: JJ
+              CRB: {crbInfo?.CRBScore ?? " - "}
     </Badge>
     <p className="text-sm text-muted-foreground">
-        Account has score: JJ.<br />
+        Account has score: {crbInfo?.CRBScore ?? " - "}.<br />
 
-        This means the customer has been very unreliable in the past. This will be of severe negative influence on his/her credit limit.
+        {/* This means the customer has been very unreliable in the past. This will be of severe negative influence on his/her credit limit. */}
     </p>
     <ul className="text-sm text-muted-foreground mt-2 list-disc list-inside space-y-1">
         <li>Low activity for assessment low</li>
@@ -27,7 +39,3 @@ export default function Crb() {
 </Card>
     );
 }
-
-{/* <Badge className="bg-destructive text-destructive-foreground px-4 py-2 text-sm font-bold mb-2">
-              CRB: JJ
-            </Badge> */}

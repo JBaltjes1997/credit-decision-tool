@@ -29,7 +29,7 @@ export default function Home() {
         
 
         {/* CRB Section */}
-        <Crb />
+        <Crb walletAccount={selectedAccount}/>
         
         {/* User Info Card */}
         <CustomerData walletAccount={selectedAccount} />
