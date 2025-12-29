@@ -19,11 +19,6 @@ export class AppController {
   //   return this.appService.getHello();
   // }
 
-  // @Get()
-  // getAccounts(): Promise<Account[]> {
-  //   return this.appService.getAccounts();
-  // }
-
   @Get('/:number/details')
   getDetails(): Promise<Detail[]> {
     return this.appService.getDetails();
@@ -33,12 +28,19 @@ export class AppController {
   // getAccount(@Param('number') number: number): Promise<Account> {
   //   return this.appService.getAccount(number);
   // }
+
+  // @Get()
+  // getAccounts(): Promise<Account[]> {
+  //   return this.appService.getAccounts();
+  // }
+
   @Get()
   getAccount(@Query('walletAccount') walletAccount: string) {
     if (!walletAccount) {
-      throw new BadRequestException(
-        'walletAccount query parameter is required',
-      );
+      // throw new BadRequestException(
+      //   'walletAccount query parameter is required',
+      // );
+      return this.appService.getAccounts();
     }
     // return this.appService.findByWalletAccount(walletAccount);
     return this.appService.getAccount(walletAccount);

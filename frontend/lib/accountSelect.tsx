@@ -10,10 +10,10 @@ type Option = {
 };
 
 type accountSelectProps = {
-  onChange?: (value: string) => void;
+  onSelect?: (walletAccount: string) => void;
 };
 
-export function accountSelect({ onChange }: accountSelectProps) {
+export function accountSelect({ onSelect }: accountSelectProps) {
   const [options, setOptions] = useState<Option[]>([]);
 
   useEffect(() => {
@@ -36,17 +36,21 @@ export function accountSelect({ onChange }: accountSelectProps) {
       className="w-full border rounded px-2 py-1"
       defaultValue=""
       onChange={(e) => {
-        if (onChange) {
-          onChange(e.currentTarget.value);
+        // if (onChange) {
+        //   onChange(e.currentTarget.value);
+        if (onSelect) {
+          onSelect(e.currentTarget.value);
         }
-      }}
+      }
+    }
+    // onChange={(e) => onSelect(e.target.value)}
     >
       <option value="" disabled>
         Select an account
       </option>
 
       {options.map((option) => (
-        <option key={option.key} value={option.value}>
+        <option key={option.key} value={option.key}>
           {option.value}
         </option>
       ))}
