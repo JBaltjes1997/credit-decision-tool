@@ -2,6 +2,7 @@
 import { use, useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { getLimits } from "@/lib/getLimits";
+import { getFinanceDetails } from "@/lib/getFinanceDetails";
 
 type CustomerDataProps = {
   walletAccount: string;
@@ -14,6 +15,13 @@ export default function CreditAdvice({ walletAccount }: { walletAccount: string 
         if(!walletAccount) return;
 
         getLimits(walletAccount).then(setCreditInfo);
+    }, [walletAccount]);
+    const [financialData, setFinancialData] = useState<any>(null);
+
+    useEffect(() => {
+        if(!walletAccount) return;
+
+        getFinanceDetails(walletAccount).then(setFinancialData);
     }, [walletAccount]);
     return (
 <Card className="border-l-4 border-l-accent-foreground bg-accent">
@@ -40,7 +48,7 @@ export default function CreditAdvice({ walletAccount }: { walletAccount: string 
         </div>
         <div className="flex justify-between">
             <span className="text-muted-foreground text-sm">Advise:</span>
-            <span className="font-bold text-accent-foreground"> - </span>
+            <span className="font-bold text-accent-foreground"> {financialData?.totalVolumeIn/60 || "-"} </span>
         </div>
         </div>
     </div>

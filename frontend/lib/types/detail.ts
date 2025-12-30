@@ -12,4 +12,5 @@ export type Detail = {
   fuliza: number;
   overdraft: number;
   liquorOut: number;
+  gamblingOut: number;
 };

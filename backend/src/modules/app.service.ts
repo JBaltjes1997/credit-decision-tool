@@ -51,6 +51,7 @@ export class AppService {
       fuliza: 50,
       overdraft: 75,
       liquorOut: 125,
+      gamblingOut: 175,
     },
     {
       walletAccount: 'q7654321',
@@ -66,6 +67,7 @@ export class AppService {
       fuliza: 75,
       overdraft: 112.5,
       liquorOut: 187.5,
+      gamblingOut: 262.5,
     },
   ];
 
