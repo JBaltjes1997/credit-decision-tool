@@ -16,6 +16,7 @@ export default function CreditAdvice({ walletAccount }: { walletAccount: string 
 
         getLimits(walletAccount).then(setCreditInfo);
     }, [walletAccount]);
+
     const [financialData, setFinancialData] = useState<any>(null);
 
     useEffect(() => {
@@ -34,21 +35,21 @@ export default function CreditAdvice({ walletAccount }: { walletAccount: string 
         <div className="space-y-2">
         <div className="flex justify-between">
             <span className="text-muted-foreground text-sm">Proposed limit:</span>
-            <span className="font-bold text-primary">{creditInfo?.proposedLimit || "Onbekend"}</span>
+            <span className="font-bold text-primary">{creditInfo?.proposedlimit || "Onbekend"}</span>
         </div>
         <div className="flex justify-between">
             <span className="text-muted-foreground text-sm">Predicted limit:</span>
-            <span className="font-bold text-primary">{creditInfo?.predictedLimit || "Onbekend"}</span>
+            <span className="font-bold text-primary">{creditInfo?.predictedlimit || "Onbekend"}</span>
         </div>
         </div>
         <div className="space-y-2">
         <div className="flex justify-between">
             <span className="text-muted-foreground text-sm">Expected limit:</span>
-            <span className="font-bold text-primary">{creditInfo?.expectedLimit || "Onbekend"}</span>
+            <span className="font-bold text-primary">{creditInfo?.expectedlimit || "Onbekend"}</span>
         </div>
         <div className="flex justify-between">
             <span className="text-muted-foreground text-sm">Advise:</span>
-            <span className="font-bold text-accent-foreground"> {financialData?.totalVolumeIn/60 || "-"} </span>
+            <span className="font-bold text-accent-foreground"> {financialData?.totalvolumein/60 || "-"} </span>
         </div>
         </div>
     </div>

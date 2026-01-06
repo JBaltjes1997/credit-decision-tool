@@ -21,11 +21,6 @@ export class AppController {
     return this.appService.getAccount(walletAccount);
   }
 
-  // @Get('/hello')
-  // getGreeting(): Promise<Record<string, string>> {
-  //   return this.appService.getHello();
-  // }
-
   @Get('/limits')
   getLimits(@Query('walletAccount') walletAccount: string) {
     return this.appService.getLimits(walletAccount);
@@ -34,10 +29,5 @@ export class AppController {
   @Get('/details')
   getDetails(@Query('walletAccount') walletAccount: string) {
     return this.appService.getDetails(walletAccount);
-  }
-
-  @Get('/hello')
-  getTime(): Promise<Record<string, string>> {
-    return this.appService.getHello();
   }
 }

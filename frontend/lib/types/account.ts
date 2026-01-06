@@ -1,5 +1,5 @@
 export type Account = {
-    walletAccount: string; 
+    walletaccount: string; 
     username: string; 
     phonenumber: number;
 }

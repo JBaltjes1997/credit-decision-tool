@@ -9,8 +9,10 @@ type Option = {
   value: string;
 };
 
+
+
 type accountSelectProps = {
-  onSelect?: (walletAccount: string) => void;
+  onSelect?: (walletaccount: string) => void;
 };
 
 export function accountSelect({ onSelect }: accountSelectProps) {
@@ -18,13 +20,12 @@ export function accountSelect({ onSelect }: accountSelectProps) {
 
   useEffect(() => {
     async function fetchData() {
-      const accounts = await api<Account[]>("/accounts");
-
-      const results: Option[] = accounts.map((account) => ({
-        key: account.walletAccount,
-        value: `${account.username} (${account.phonenumber})`,
+      const accounts = await api<Account[]>("/accounts"); 
+      const results: Option[] = accounts.map((account) => ({ 
+        key: account.walletaccount, 
+        value: `${account.username} (${account.phonenumber})` 
       }));
-
+      
       setOptions(results);
     }
 

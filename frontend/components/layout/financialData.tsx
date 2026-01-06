@@ -30,11 +30,11 @@ return (
     <h4 className="text-sm font-semibold text-accent-foreground uppercase tracking-wide">Inkomen</h4>
     <div className="flex justify-between">
         <span className="text-muted-foreground">estimatedIncome:</span>
-        <span className="font-medium">{financialData?.estimatedIncome ?? "-" }</span>
+        <span className="font-medium">{financialData?.estimatedincome ?? "-" }</span>
     </div>
     <div className="flex justify-between">
         <span className="text-muted-foreground">salaryIn:</span>
-        <span className="font-medium">{financialData?.salaryIn ?? "-" }</span>
+        <span className="font-medium">{financialData?.salaryin ?? "-" }</span>
     </div>
     </div>
 
@@ -43,19 +43,19 @@ return (
     <h4 className="text-sm font-semibold text-accent-foreground uppercase tracking-wide">Volume</h4>
     <div className="flex justify-between">
         <span className="text-muted-foreground">totalVolumeIn:</span>
-        <span className="font-medium">{financialData?.totalVolumeIn ?? "-" }</span>
+        <span className="font-medium">{financialData?.totalvolumein ?? "-" }</span>
     </div>
     <div className="flex justify-between">
         <span className="text-muted-foreground">totalVolumeOut:</span>
-        <span className="font-medium">{financialData?.totalVolumeOut ?? "-" }</span>
+        <span className="font-medium">{financialData?.totalvolumeout ?? "-" }</span>
     </div>
     <div className="flex justify-between">
         <span className="text-muted-foreground">wholesaleAvgOut:</span>
-        <span className="font-medium">{financialData?.wholesaleAvgOut ?? "-" }</span>
+        <span className="font-medium">{financialData?.wholesaleavgout ?? "-" }</span>
     </div>
     <div className="flex justify-between">
         <span className="text-muted-foreground">wholesaleMaxOut:</span>
-        <span className="font-medium">{financialData?.wholesaleMaxOut ?? "-" }</span>
+        <span className="font-medium">{financialData?.wholesalemaxout ?? "-" }</span>
     </div>
     </div>
 
@@ -64,11 +64,11 @@ return (
     <h4 className="text-sm font-semibold text-accent-foreground uppercase tracking-wide">Krediet</h4>
     <div className="flex justify-between">
         <span className="text-muted-foreground">creditIn:</span>
-        <span className="font-medium">{financialData?.creditIn ?? "-" }</span>
+        <span className="font-medium">{financialData?.creditin ?? "-" }</span>
     </div>
     <div className="flex justify-between">
         <span className="text-muted-foreground">creditOut:</span>
-        <span className="font-medium">{financialData?.creditOut ?? "-" }</span>
+        <span className="font-medium">{financialData?.creditout ?? "-" }</span>
     </div>
     <div className="flex justify-between">
         <span className="text-muted-foreground">fuliza:</span>
@@ -85,11 +85,11 @@ return (
     <h4 className="text-sm font-semibold text-destructive uppercase tracking-wide">Risico-indicatoren</h4>
     <div className="flex justify-between">
         <span className="text-muted-foreground">liquorOut:</span>
-        <span className="font-medium">{financialData?.liquorOut ?? "-" }</span>
+        <span className="font-medium">{financialData?.liquorout ?? "-" }</span>
     </div>
     <div className="flex justify-between">
         <span className="text-muted-foreground">gamblingOut:</span>
-        <span className="font-medium text-destructive">{financialData?.gamblingOut ?? "-" }</span>
+        <span className="font-medium text-destructive">{financialData?.gamblingout ?? "-" }</span>
     </div>
     </div>
 </CardContent>
