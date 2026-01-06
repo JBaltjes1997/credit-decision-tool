@@ -8,6 +8,9 @@ export async function api<T>(
   const res = await fetch(`${API_URL}${path}`, {
     // credentials: 'include',
     ...options,
+    headers: {
+      'x-api-key': 'ak_live_9f3cA2mQw7R8LxE5BvD1HkU6',
+  },
   });
 
   if (!res.ok) throw new Error('API error');

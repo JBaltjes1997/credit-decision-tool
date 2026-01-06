@@ -13,7 +13,6 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  // getAccount(@Query('walletAccount') walletAccount: string) {
   getAccount(@Query('walletAccount') walletAccount: string) {
     if (!walletAccount) {
       return this.appService.getAccounts();
