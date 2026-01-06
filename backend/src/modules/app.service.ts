@@ -71,17 +71,37 @@ export class AppService {
     },
   ];
 
-  // async getHello(): Promise<Record<string, string>> {
-  //   const queryResult = (await this.databaseService.query(
-  //     'SELECT NOW() AS now',
-  //   )) as unknown as { now: string };
+  async getHello(): Promise<Record<string, string>> {
+    // const queryResult = (await this.databaseService.query(
+    //   // 'SELECT NOW() AS now',
+    //   'select * from account',
+    // )) as unknown as { now: string };
+    // console.log(queryResult);
+    // return {
+    //   message: `Tables are : ${queryResult[0]}`,
+    // };
 
-  //   return {
-  //     message: `Current time from DB is: ${queryResult[0].now}`,
-  //   };
+    // const queryResult = await this.databaseService.getClient();
+    const queryResult = await queryResult.query('SELECT * from accounts');
+    return {
+      message: `Database client acquired ${JSON.stringify(queryResult.rows)}`,
+    };
+  }
+
+  // async getAccounts(): Promise<Account[]> {
+  //   // return this.accounts;
+  //   const queryResult = await this.databaseService.query(
+  //     `SELECT * FROM accounts`,
+  //   );
+  //   console.log(queryResult);
+  //   return JSON.stringify(queryResult.rows) as unknown as Account[];
   // }
-  getAccounts(): Account[] {
-    return this.accounts;
+  async getAccounts(): Promise<Account[]> {
+    const queryResult = await this.databaseService.query(
+      `SELECT * FROM accounts`,
+    );
+
+    return queryResult as unknown as Account[];
   }
 
   getAccount(walletAccount: string): Account {
