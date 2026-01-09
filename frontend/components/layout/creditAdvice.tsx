@@ -25,9 +25,9 @@ export default function CreditAdvice({ walletAccount }: { walletAccount: string 
         getFinanceDetails(walletAccount).then(setFinancialData);
     }, [walletAccount]);
     return (
-<Card className="border-l-4 border-l-accent-foreground bg-accent">
+<Card className="border-l-4 border-l-accent-foreground bg-accent" style={{ backgroundColor: "white" }}>
     <CardHeader className="pb-2">
-    <CardTitle className="text-lg text-accent-foreground">Kredietadvies</CardTitle>
+    <CardTitle className="text-lg text-accent-foreground">CreditAdvice</CardTitle>
     </CardHeader>
     <CardContent className="space-y-4">
     {/* Limits */}
@@ -49,14 +49,14 @@ export default function CreditAdvice({ walletAccount }: { walletAccount: string 
         </div>
         <div className="flex justify-between">
             <span className="text-muted-foreground text-sm">Advise:</span>
-            <span className="font-bold text-accent-foreground"> {financialData?.totalvolumein/60 || "-"} </span>
+            <span className="font-bold text-accent-foreground"> { calculate_expected_limit(financialData?.salaryin) || "-"} </span>
         </div>
         </div>
     </div>
 
     {/* Advice Explanation */}
     <div>
-        <p className="font-medium text-foreground mb-2">Het advies is gebaseerd op:</p>
+        <p className="font-medium text-foreground mb-2">The advice is based on:</p>
         <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
         <li>The customer has a low average volume</li>
         <li>The customer&apos;s probability of default score is very high: 0.5.</li>
@@ -69,4 +69,35 @@ export default function CreditAdvice({ walletAccount }: { walletAccount: string 
     </CardContent>
 </Card> 
     );
+
+    function calculate_limit_advanced(): Array<number>{
+        const totalIn = financialData?.totalvolumein;
+        const totalOut = financialData?.totalvolumeout;
+        const wholeSaleAvg = financialData?.whosaleavgout;
+
+        // Check wholesale - positively reward higher wholesale
+        let expect_limit = calculate_expected_limit(totalIn, 0);
+        if(wholeSaleAvg > expect_limit){
+            expect_limit = wholeSaleAvg;
+        }
+
+        // Penalize estimated limit based on the volume covered by credit volume by 50%
+        const credit_out = Math.abs(financialData?.creditout);
+        const credit_penalty = calculate_expected_limit(credit_out, 0) * 0.5;
+        expect_limit -= credit_penalty;
+
+        const red_flags_out = Math.abs(financialData?.liquorout) + Math.abs(financialData?.gamblingout);
+        const red_flags_ratio = totalOut !== 0 ? red_flags_out / totalOut : 0;
+        expect_limit -= expect_limit * Math.min(5*red_flags_ratio, 1);
+
+        expect_limit = Math.round(expect_limit / 5000) * 5000;
+
+        return [expect_limit, totalIn];
+    }
+
+    function calculate_expected_limit(salaryIn: number, base=5000): number{
+        const estimated_limit = Math.pow(0.33, Math.min(salaryIn / 25e6, 1)) * 0.0167 * salaryIn;
+        const rounded_limit = Math.max(Math.round(estimated_limit / 5000) * 5000, base);
+        return rounded_limit;
+    }
 }

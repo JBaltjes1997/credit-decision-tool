@@ -19,9 +19,9 @@ export default function CustomerData({ walletAccount }: CustomerDataProps) {
         getAccountInfo(walletAccount).then(setAccountInfo);
     }, [walletAccount]);
     return (
-        <Card className="border-l-4 border-l-primary bg-accent">
+        <Card className="border-l-4 border-l-primary bg-accent" style={{ backgroundColor: "white" }}>
             <CardHeader className="pb-2">
-            <CardTitle className="text-lg text-primary">Klantgegevens</CardTitle>
+            <CardTitle className="text-lg text-primary">Customer data</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
             <div className="flex justify-between gap-8">

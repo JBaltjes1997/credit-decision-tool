@@ -20,14 +20,14 @@ export default function FinancialData({walletAccount}: CustomerDataProps) {
 
 return (
 
-<Card className="border-l-4 border-l-primary bg-accent">
+<Card className="border-l-4 border-l-primary bg-accent" style={{ backgroundColor: "white" }}>
 <CardHeader className="pb-2">
-    <CardTitle className="text-lg text-primary">Financiële Data</CardTitle>
+    <CardTitle className="text-lg text-primary">Financial Data</CardTitle>
 </CardHeader>
 <CardContent className="space-y-4">
     {/* Income Section */}
     <div className="space-y-2">
-    <h4 className="text-sm font-semibold text-accent-foreground uppercase tracking-wide">Inkomen</h4>
+    <h4 className="text-sm font-semibold text-accent-foreground uppercase tracking-wide">Income</h4>
     <div className="flex justify-between">
         <span className="text-muted-foreground">estimatedIncome:</span>
         <span className="font-medium">{financialData?.estimatedincome ?? "-" }</span>
@@ -61,7 +61,7 @@ return (
 
     {/* Credit Section */}
     <div className="space-y-2 pt-2 border-t border-border">
-    <h4 className="text-sm font-semibold text-accent-foreground uppercase tracking-wide">Krediet</h4>
+    <h4 className="text-sm font-semibold text-accent-foreground uppercase tracking-wide">Credit</h4>
     <div className="flex justify-between">
         <span className="text-muted-foreground">creditIn:</span>
         <span className="font-medium">{financialData?.creditin ?? "-" }</span>
@@ -82,7 +82,7 @@ return (
 
     {/* Risk Indicators */}
     <div className="space-y-2 pt-2 border-t border-border">
-    <h4 className="text-sm font-semibold text-destructive uppercase tracking-wide">Risico-indicatoren</h4>
+    <h4 className="text-sm font-semibold text-destructive uppercase tracking-wide">Risk indicators</h4>
     <div className="flex justify-between">
         <span className="text-muted-foreground">liquorOut:</span>
         <span className="font-medium">{financialData?.liquorout ?? "-" }</span>

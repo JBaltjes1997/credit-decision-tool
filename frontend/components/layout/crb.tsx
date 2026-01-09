@@ -1,20 +1,25 @@
 "use client";
 import { Badge } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
-import { useEffect, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import { getFinanceDetails } from "@/lib/getFinanceDetails";
+// import { promises as fs } from 'fs';
+// import { crbValues } from "../crb.json";
 
 type CustomerDataProps = {
   walletAccount: string;
 };
 export default function Crb({walletAccount}: CustomerDataProps) {
     const [crbInfo, setCrbInfo] = useState<any>(null);
+    // const [crbscore, setCrbscore] = useState<string>("");
 
     useEffect(() => {
         if(!walletAccount) return;
         
         getFinanceDetails(walletAccount).then(setCrbInfo);
     }, [walletAccount]);
+
+    const crb = crbInfo?.crbscore || "";
     return (
 <Card className="border-l-4 border-l-destructive">
     <CardHeader className="pb-2">
@@ -22,20 +27,30 @@ export default function Crb({walletAccount}: CustomerDataProps) {
     </CardHeader>
     <CardContent>
    <Badge className="bg-destructive text-destructive-foreground px-4 py-2 text-sm font-bold mb-2">
-              CRB: {crbInfo?.crbscore ?? " - "}
+              CRB: {crb || " - "}
     </Badge>
     <p className="text-sm text-muted-foreground">
-        Account has score: {crbInfo?.crbscore ?? " - "}.<br />
+        Account has score: {crb || " - "}.<br />
 
         {/* This means the customer has been very unreliable in the past. This will be of severe negative influence on his/her credit limit. */}
     </p>
     <ul className="text-sm text-muted-foreground mt-2 list-disc list-inside space-y-1">
-        <li>Low activity for assessment low</li>
+        {/* <li>Low activity for assessment low</li>
         <li>High level of recent credit enquiry activity</li>
         <li>Recent delinquency on accounts</li>
-        <li>High installment delinquency in the last 24 hours</li>
+        <li>High installment delinquency in the last 24 hours</li> */}
+        {elaborateCRBvalue(crb)}
     </ul>
     </CardContent>
 </Card>
     );
+
+    function elaborateCRBvalue(crb: string): string | JSX.Element | undefined {
+        switch(crb){
+            case "CC":
+                return <><li>Decent activity for assessment decent</li><li>Good level of recent credit enquiry activity</li><li>No recent delinquency on accounts</li><li>No installment delinquency in the last month</li></>;
+            case "JJ":
+                return <><li>Low activity for assessment low</li><li>High level of recent credit enquiry activity</li><li>Recent delinquency on accounts</li><li>High installment delinquency in the last 24 hours</li></>;
+        }        
+    }
 }

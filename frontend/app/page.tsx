@@ -21,7 +21,7 @@ export default function Home() {
     <div className="min-h-screen bg-muted p-6">
       <div className="w-[1200px] mx-auto space-y-4">
         {/* Page Title */}
-        <h1 className="text-2xl font-bold text-foreground">Krediet Beoordeling Dashboard</h1>
+        <h1 className="text-2xl font-bold text-foreground">Credit Assesment Dashboard</h1>
         {/* {accountSelect({})} */}
         {accountSelect({          
           onSelect: setSelectedAccount,
