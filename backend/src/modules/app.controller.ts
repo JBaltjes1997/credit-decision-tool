@@ -7,17 +7,18 @@ import {
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Account } from 'src/common/types/account';
+import { wallet } from 'src/common/types/wallet';
 
-@Controller('/accounts')
+@Controller('/wallets')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getAccount(@Query('walletAccount') walletAccount: string) {
+  getWallet(@Query('walletAccount') walletAccount: string) {
     if (!walletAccount) {
-      return this.appService.getAccounts();
+      return this.appService.getWallets();
     }
-    return this.appService.getAccount(walletAccount);
+    return this.appService.getWallet(walletAccount);
   }
 
   @Get('/limits')

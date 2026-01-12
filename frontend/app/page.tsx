@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 // import { get } from "https";
 // import { api } from "@/lib/api-client";
 // import { Account } from "@/lib/types/account";
-import { accountSelect } from "@/lib/accountSelect";
+import { walletSelect } from "@/lib/walletSelect";
 import FinancialData from "@/components/layout/financialData";
 import CustomerData from "@/components/layout/customerData";
 import CreditAdvice from "@/components/layout/creditAdvice";
@@ -15,32 +15,30 @@ import { on } from "events";
 import { useState } from "react";
 
 export default function Home() {
-  const [selectedAccount, setSelectedAccount] = useState<string>("");
+  const [selectedWallet, setSelectedWallet] = useState<string>("");
   return (
     
     <div className="min-h-screen bg-muted p-6">
       <div className="w-[1200px] mx-auto space-y-4">
         {/* Page Title */}
         <h1 className="text-2xl font-bold text-foreground">Credit Assesment Dashboard</h1>
-        {/* {accountSelect({})} */}
-        {accountSelect({          
-          onSelect: setSelectedAccount,
+        {/* {walletSelect({})} */}
+        {walletSelect({          
+          onSelect: setSelectedWallet,
         })}
         
 
         {/* CRB Section */}
-        <Crb walletAccount={selectedAccount} />
-        
+        <Crb walletAccount={selectedWallet} />
         {/* User Info Card */}
-        <CustomerData walletAccount={selectedAccount} />
+        <CustomerData walletAccount={selectedWallet} />
         
 
         {/* Financial Data Card */}
-        <FinancialData walletAccount={selectedAccount}/>
-        
+        <FinancialData walletAccount={selectedWallet}/>
 
         {/* Advice Section with Limits */}
-        <CreditAdvice walletAccount={selectedAccount} />
+        <CreditAdvice walletAccount={selectedWallet} />
       </div>
     </div>
   );

@@ -2,28 +2,28 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { DatabaseService } from './database/database.service';
 import { Account } from 'src/common/types/account';
 import { Limit } from 'src/common/types/Limit';
+import { Wallet } from 'src/common/types/wallet';
 import { Detail } from 'src/common/types/detail';
 import { get } from 'http';
 
 @Injectable()
 export class AppService {
   constructor(private readonly databaseService: DatabaseService) {}
-  async getAccounts(): Promise<Account[]> {
-    const queryResult = await this.databaseService.query(
-      `SELECT * FROM accounts`,
-    );
-    return queryResult as unknown as Account[];
+  async getWallets(): Promise<Wallet[]> {
+    const queryResult =
+      await this.databaseService.query(`SELECT * FROM wallet`);
+    return queryResult as unknown as Wallet[];
   }
 
-  async getAccount(walletAccount: string): Promise<Account> {
+  async getWallet(walletAccount: string): Promise<Wallet> {
     const queryResult = await this.databaseService.query(
-      `SELECT * FROM accounts WHERE walletAccount = $1`,
+      `SELECT * FROM wallet WHERE walletAccount = $1`,
       [walletAccount],
     );
     if (!queryResult || queryResult.length === 0) {
-      throw new NotFoundException('Account not found');
+      throw new NotFoundException('Wallet not found');
     }
-    return queryResult[0] as unknown as Account;
+    return queryResult[0] as unknown as Wallet;
   }
 
   async getLimits(walletAccount: string): Promise<Limit> {

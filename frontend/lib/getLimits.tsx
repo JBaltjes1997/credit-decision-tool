@@ -4,6 +4,6 @@ import { Limit } from "./types/limit";
 
 
 export async function getLimits(walletAccount: string): Promise<Limit[]> {
-  const limits = await api<Limit[]>(`/accounts/limits?walletAccount=${walletAccount}`);
+  const limits = await api<Limit[]>(`/wallets/limits?walletAccount=${walletAccount}`);
   return limits;
 }

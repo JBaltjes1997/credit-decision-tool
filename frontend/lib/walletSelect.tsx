@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { api } from "./api-client";
 import { Account } from "./types/account";
+import { Wallet } from "./types/wallet";  
 import { Key } from "lucide-react";
 
 type Option = {
@@ -10,21 +11,19 @@ type Option = {
   value: string;
 };
 
-
-
-type accountSelectProps = {
+type walletSelectProps = {
   onSelect?: (walletaccount: string) => void;
 };
 
-export function accountSelect({ onSelect }: accountSelectProps) {
+export function walletSelect({ onSelect }: walletSelectProps) {
   const [options, setOptions] = useState<Option[]>([]);
 
   useEffect(() => {
     async function fetchData() {
-      const accounts = await api<Account[]>("/accounts"); 
-      const results: Option[] = accounts.map((account) => ({ 
-        key: account.walletaccount, 
-        value: `${account.username} (${account.phonenumber})` 
+      const wallets = await api<Wallet[]>("/wallets"); 
+      const results: Option[] = wallets.map((wallet) => ({ 
+        key: wallet.walletaccount, 
+        value: `${wallet.username} (${wallet.phonenumber})` 
       }));
           
       

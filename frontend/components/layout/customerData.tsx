@@ -1,7 +1,7 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { accountSelect } from "@/lib/accountSelect";
-import { getAccountInfo } from "@/lib/getAccountInfo";
+import { walletSelect } from "@/lib/walletSelect";
+import { getWalletInfo } from "@/lib/getWalletInfo";
 import { get } from "http";
 import { useEffect, useState } from "react";
 
@@ -11,12 +11,12 @@ type CustomerDataProps = {
 };
 
 export default function CustomerData({ walletAccount }: CustomerDataProps) {
-    const [accountInfo, setAccountInfo] = useState<any>(null);
+    const [walletInfo, setWalletInfo] = useState<any>(null);
 
     useEffect(() => {
         if(!walletAccount) return;
         
-        getAccountInfo(walletAccount).then(setAccountInfo);
+        getWalletInfo(walletAccount).then(setWalletInfo);
     }, [walletAccount]);
     return (
         <Card className="border-l-4 border-l-primary bg-accent" style={{ backgroundColor: "white" }}>
@@ -26,11 +26,11 @@ export default function CustomerData({ walletAccount }: CustomerDataProps) {
             <CardContent className="space-y-2">
             <div className="flex justify-between gap-8">
                 <span className="text-muted-foreground">Sevi User name:</span>
-                <span className="font-medium"> {accountInfo?.username ?? "Onbekend"}</span>
+                <span className="font-medium"> {walletInfo?.username ?? "Onbekend"}</span>
             </div>
             <div className="flex justify-between gap-8">
                 <span className="text-muted-foreground">Sevi Phone Number:</span>
-                <span className="font-medium"> {accountInfo?.phonenumber ?? "Onbekend"}</span>
+                <span className="font-medium"> {walletInfo?.phonenumber ?? "Onbekend"}</span>
             </div>
             </CardContent>
         </Card>
