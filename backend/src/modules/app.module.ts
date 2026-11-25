@@ -5,9 +5,14 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { ApiKeyGuard } from '../common/guards/api-key.guard';
+// import { ElasticsearchModule } from './elastic/elasticsearch.module';
 
 @Module({
-  imports: [DatabaseModule, ConfigModule.forRoot({ isGlobal: true })],
+  imports: [
+    DatabaseModule,
+    // ElasticsearchModule,
+    ConfigModule.forRoot({ isGlobal: true }),
+  ],
   controllers: [AppController],
   providers: [
     AppService,

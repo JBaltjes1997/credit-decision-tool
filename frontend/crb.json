@@ -1,0 +1,16 @@
+[{
+    "CC" : [
+        "Average activity",
+        "No recent credit enquiries",
+        "No recent delinquency on accounts",
+        "No installment delinquency in the last month"
+    ]
+    },
+{
+    "JJ" : [
+        "Low activity for assessment low",
+        "High level of recent credit enquiry activity",
+        "Recent delinquency on accounts",
+        "High installment delinquency in the last 24 hours"
+    ]
+}]

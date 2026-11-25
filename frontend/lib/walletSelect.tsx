@@ -26,7 +26,6 @@ export function walletSelect({ onSelect }: walletSelectProps) {
         value: `${wallet.username} (${wallet.phonenumber})` 
       }));
           
-      
       setOptions(results);
     }
 

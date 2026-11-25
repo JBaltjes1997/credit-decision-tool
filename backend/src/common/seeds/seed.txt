@@ -1,0 +1,61 @@
+create table Wallet(
+	walletID varchar(255) not null unique,
+	account varchar(255),
+	username varchar(255),
+	primary key (walletId)
+);
+
+create table Limits(
+	currentLimit bigint,
+	proposedLimit bigint, 
+	predictedLimit bigint,
+	expectedLimit bigint,
+	foreign key (account) references Wallet(account)
+);
+
+create table Details(
+	walletAccount varchar(255) not null,
+  	CRBScore varchar(255),
+	estimatedIncome bigint,
+  	salaryIn bigint,
+  	totalVolumeIn bigint,
+  	totalVolumeOut bigint,
+  	wholesaleAvgOut bigint,
+  	wholesaleMaxOut bigint,
+  	creditIn bigint,
+  	creditOut bigint,
+  	fuliza bigint,
+  	overdraft bigint,
+  	liquorOut bigint,
+  	gamblingOut bigint,
+	primary key (walletAccount)
+);
+
+create table User(
+	id varchar(255) not null unique,
+	username varchar(255),
+	phonenumber varchar(255),
+	primary key (id),
+	foreign key (account) references Wallet(account)
+);
+
+create table user to wallet(
+	id varchar(255),
+	name varchar(255),
+	primary key (id)
+);
+
+insert into Wallet(walletID, username, phonenumber)
+values('p1234567', 'A. Nonymous', '+2541001001');
+('q7654321', 'N. O''Nonymous', '+25401100110');
+
+insert into Limits(walletAccount, currentLimit, proposedLimit, predictedLimit, expectedLimit)
+values('p1234567', 1000, 2000, 1100, 0),
+('q7654321', 2500, 500, 1000, 1000);
+
+insert into Details(walletAccount, crbscore, estimatedIncome,salaryIn, totalVolumeIn, totalvolumeout, wholesaleavgout, wholesalemaxout, creditin, creditout, fuliza, overdraft, liquorout, gamblingout)
+values('p1234567', 'JJ', 10000, 9000, 8000, 14000, 20000, 30000, 19000, 19000, 200, 600, 120, 350),
+('q7654321', 'CC', 20000, 8000, 6500, 11500, 17800, 25000, 15000, 10000, 500, 1000, 0, 0);
+	
+	
+	

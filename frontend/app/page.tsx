@@ -13,6 +13,7 @@ import CreditAdvice from "@/components/layout/creditAdvice";
 import Crb from "@/components/layout/crb";
 import { on } from "events";
 import { useState } from "react";
+import { getDetails } from "@/lib/getDetailsFromElastic";
 
 export default function Home() {
   const [selectedWallet, setSelectedWallet] = useState<string>("");
@@ -25,8 +26,7 @@ export default function Home() {
         {/* {walletSelect({})} */}
         {walletSelect({          
           onSelect: setSelectedWallet,
-        })}
-        
+        })}        
 
         {/* CRB Section */}
         <Crb walletAccount={selectedWallet} />
@@ -40,7 +40,7 @@ export default function Home() {
         {/* Advice Section with Limits */}
         <CreditAdvice walletAccount={selectedWallet} />
       </div>
-    </div>
+    </div>    
   );
 };
 
